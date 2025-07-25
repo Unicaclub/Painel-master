@@ -1,0 +1,11 @@
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const userRoutes = require('./routes/userRoutes');
+const errorHandler = require('./middleware/errorHandler');
+app.use(cors());
+app.use(express.json());
+app.use('/api/users', userRoutes);
+app.get('/health', (req, res) => res.send({ status: "API Online", time: new Date() }));
+app.use(errorHandler);
+module.exports = app;
